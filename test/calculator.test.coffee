@@ -63,7 +63,7 @@ exports.CalculatorTest =
         test.equal(result, 30000000000)
         test.done()
 
-	'cluster ram quota required returns default value of 8': (test) ->
+    'cluster ram quota required returns default value of 8': (test) ->
         calculator = new Calculator
         result = calculator.cluster_ram_quota_required()
         test.equal(result, 8)
@@ -93,3 +93,27 @@ exports.CalculatorTest =
         result = calculator._overhead_percentage()
         test.equal(result, .30)
         test.done()
+
+    'number of nodes required is 6 when the required ram is 64GB and each node contains 11GB of available ram': (test) ->
+    	calculator = new Calculator(
+    		number_of_replicas: 2
+    		num_of_documents: 10000000
+    		id_size: 60
+    		value_size: 2000
+    		working_set_percentage: .5
+    		storage_type: Calculator.SPINNING_STORAGE_TYPE
+    	)
+    	ram_required = calculator.cluster_ram_quota_required()
+    	nodes_required = Calculator.number_of_nodes_needed(ram_required, 11)
+    	test.equal(nodes_required, 6)
+    	test.done()
+
+    'number of nodes required is 3 when the required ram is 64GB and each node contains 23GB of available ram': (test) ->
+    	nodes_required = Calculator.number_of_nodes_needed(64, 23)
+    	test.equal(nodes_required, 3)
+    	test.done()
+
+    'number of nodes required is 0 when the required ram is 64GB and 0 is passed in as the ram available per node': (test) ->
+    	nodes_required = Calculator.number_of_nodes_needed(64, 0) ? 0
+    	test.equal(nodes_required, 0)
+    	test.done()

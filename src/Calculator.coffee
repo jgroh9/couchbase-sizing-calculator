@@ -51,9 +51,14 @@ class Calculator
 		# always round up by using ceiling so that we ensure we have enough ram specified
 		# (total_metadata + working_set) * (1 + overhead_percentage) / (high_water_mark)
 		Math.ceil(((@total_metadata() + @working_set()) * (1 + @_overhead_percentage()) / @options.high_water_mark) / 1000000000)
-		
+
 	_overhead_percentage: ->
 		if (@options.storage_type.toLowerCase() == Calculator.SPINNING_STORAGE_TYPE) then .30 else .25
+
+	# create a class method since we do not require access to any other properties or methods within the scope of the class
+	@number_of_nodes_needed: (ram_required, ram_per_node) ->
+    	return if ram_per_node == 0
+    	Math.ceil(ram_required / ram_per_node)
 #END:Calculator
 
 root = exports ? window
