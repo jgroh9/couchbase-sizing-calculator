@@ -45,7 +45,7 @@ exports.CalculatorTest =
         result = calculator.total_dataset()
         test.equal(result, 60000000000)
         test.done()
-        
+
     'working set returns default value of 4,000,000,000': (test) ->
         calculator = new Calculator
         result = calculator.working_set()
@@ -61,4 +61,35 @@ exports.CalculatorTest =
         )
         result = calculator.working_set()
         test.equal(result, 30000000000)
+        test.done()
+
+	'cluster ram quota required returns default value of 8': (test) ->
+        calculator = new Calculator
+        result = calculator.cluster_ram_quota_required()
+        test.equal(result, 8)
+        test.done()
+
+    'cluster ram quota required returns 63 when specifying multiple options to overwrite default values': (test) ->
+    	calculator = new Calculator(
+    		number_of_replicas: 2
+    		num_of_documents: 10000000
+    		id_size: 60
+    		value_size: 2000
+    		working_set_percentage: .5
+    		storage_type: Calculator.SPINNING_STORAGE_TYPE
+    	)
+    	result = calculator.cluster_ram_quota_required()
+    	test.equal(result, 63)
+    	test.done()
+
+    'overhead percentage returns default value of .25': (test) ->
+        calculator = new Calculator
+        result = calculator._overhead_percentage()
+        test.equal(result, .25)
+        test.done()
+
+    'overhead percentage returns .30 when specifying a spinning disk storage type': (test) ->
+        calculator = new Calculator(storage_type: Calculator.SPINNING_STORAGE_TYPE)
+        result = calculator._overhead_percentage()
+        test.equal(result, .30)
         test.done()

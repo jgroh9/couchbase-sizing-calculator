@@ -45,6 +45,15 @@ class Calculator
 	working_set: ->
 		# total_dataset * working_set_percentage
 		@total_dataset() * @options.working_set_percentage
+
+	cluster_ram_quota_required: ->
+		# divide the ram quota by 1,000,000,000 so that we get an approx. value in Gigabytes
+		# always round up by using ceiling so that we ensure we have enough ram specified
+		# (total_metadata + working_set) * (1 + overhead_percentage) / (high_water_mark)
+		Math.ceil(((@total_metadata() + @working_set()) * (1 + @_overhead_percentage()) / @options.high_water_mark) / 1000000000)
+		
+	_overhead_percentage: ->
+		if (@options.storage_type.toLowerCase() == Calculator.SPINNING_STORAGE_TYPE) then .30 else .25
 #END:Calculator
 
 root = exports ? window
