@@ -33,6 +33,10 @@ class Calculator
 	number_of_copies: ->
 		# 1 + number_of_replicas
 		1 + @options.number_of_replicas
+
+	total_metadata: ->
+		# num_of_documents * (metadata_per_document + id_size) * number_of_copies
+		@options.num_of_documents * (@options.metadata_per_document + @options.id_size) * @number_of_copies()
 #END:Calculator
 
 root = exports ? window
