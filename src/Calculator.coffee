@@ -37,6 +37,10 @@ class Calculator
 	total_metadata: ->
 		# num_of_documents * (metadata_per_document + id_size) * number_of_copies
 		@options.num_of_documents * (@options.metadata_per_document + @options.id_size) * @number_of_copies()
+
+	total_dataset: ->
+		# num_of_documents * value_size * number_of_copies
+		@options.num_of_documents * @options.value_size * @number_of_copies()
 #END:Calculator
 
 root = exports ? window

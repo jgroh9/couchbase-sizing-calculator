@@ -29,3 +29,19 @@ exports.CalculatorTest =
         result = calculator.total_metadata()
         test.equal(result, 3480000000)
         test.done()
+    
+    'total dataset returns default value of 20,000,000,000': (test) ->
+        calculator = new Calculator
+        result = calculator.total_dataset()
+        test.equal(result, 20000000000)
+        test.done()
+
+    'total dataset returns a value of 60,000,000,000 when specifying multiple options to overwrite default values': (test) ->
+        calculator = new Calculator(
+        	number_of_replicas: 2
+        	num_of_documents: 10000000
+        	value_size: 2000
+        )
+        result = calculator.total_dataset()
+        test.equal(result, 60000000000)
+        test.done()
