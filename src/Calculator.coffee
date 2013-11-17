@@ -19,8 +19,8 @@ class Calculator
 	constructor: (options={}) ->
 		# if running this code in a browser and you have jQuery available you can simplify the constructor logic
 		# by uncommenting the line below and removing the remaining code below that line.
-		#@options = $.extend({}, @defaults, options)
-		@options = {}		
+		#@options = $.extend({}, @constructor.DEFAULTS, options)
+		@options = {}
 		@options.numOfDocuments         = options.numOfDocuments        ? @constructor.DEFAULTS.numOfDocuments
 		@options.idSize                 = options.idSize                ? @constructor.DEFAULTS.idSize
 		@options.valueSize              = options.valueSize             ? @constructor.DEFAULTS.valueSize
