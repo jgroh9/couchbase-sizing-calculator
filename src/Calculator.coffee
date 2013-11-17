@@ -41,6 +41,10 @@ class Calculator
 	total_dataset: ->
 		# num_of_documents * value_size * number_of_copies
 		@options.num_of_documents * @options.value_size * @number_of_copies()
+
+	working_set: ->
+		# total_dataset * working_set_percentage
+		@total_dataset() * @options.working_set_percentage
 #END:Calculator
 
 root = exports ? window
