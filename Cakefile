@@ -3,6 +3,8 @@ fs = require 'fs'
 {print} = require 'sys'
 {spawn} = require 'child_process'
 
+option '-o', '--output [DIR]', 'output dir'
+
 build = (callback) ->
   coffee = spawn 'coffee', ['-c', '-o', 'lib', 'src']
   coffee.stderr.on 'data', (data) ->
@@ -14,3 +16,15 @@ build = (callback) ->
 
 task 'build', 'Build lib/ from src/', ->
   build()
+
+task 'watch', 'Watch src/ for changes', ->
+  coffee = spawn 'coffee', ['-w', '-c', '-o', 'lib', 'src']
+  coffee.stderr.on 'data', (data) ->
+    process.stderr.write data.toString()
+  coffee.stdout.on 'data', (data) ->
+    print data.toString()
+
+task 'open', 'Open index.html', ->
+  # First open, then watch
+  spawn 'open', 'index.html'
+  invoke 'watch'
