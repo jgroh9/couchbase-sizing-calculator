@@ -33,7 +33,7 @@ When using the script within a webpage you can update the constructor to have it
 
 <pre>
 constructor: (options={}) ->
-	@options = $.extend({}, @defaults, options)
+	@options = $.extend({}, @constructor.DEFAULTS, options)
 </pre>
 
 Don't forget to make sure you have included jQuery on you webpage that you are running the calculator from otherwise this will not work.
