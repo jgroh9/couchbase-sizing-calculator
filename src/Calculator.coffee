@@ -21,14 +21,14 @@ class Calculator
 		# by uncommenting the line below and removing the remaining code below that line.
 		#@options = $.extend({}, @defaults, options)
 		@options = {}		
-		@options.numOfDocuments			= options.numOfDocuments 		? @constructor.DEFAULTS.numOfDocuments
-		@options.idSize 				= options.idSize 				? @constructor.DEFAULTS.idSize
-		@options.valueSize				= options.valueSize 			? @constructor.DEFAULTS.valueSize
-		@options.numberOfReplicas		= options.numberOfReplicas 		? @constructor.DEFAULTS.numberOfReplicas
-		@options.workingSetPercentage	= options.workingSetPercentage	? @constructor.DEFAULTS.workingSetPercentage
-		@options.metadataPerDocument 	= options.metadataPerDocument 	? @constructor.DEFAULTS.metadataPerDocument
-		@options.storageType 			= options.storageType 			? @constructor.DEFAULTS.storageType
-		@options.highWaterMark 			= options.highWaterMark 		? @constructor.DEFAULTS.highWaterMark		
+		@options.numOfDocuments         = options.numOfDocuments        ? @constructor.DEFAULTS.numOfDocuments
+		@options.idSize                 = options.idSize                ? @constructor.DEFAULTS.idSize
+		@options.valueSize              = options.valueSize             ? @constructor.DEFAULTS.valueSize
+		@options.numberOfReplicas       = options.numberOfReplicas      ? @constructor.DEFAULTS.numberOfReplicas
+		@options.workingSetPercentage   = options.workingSetPercentage  ? @constructor.DEFAULTS.workingSetPercentage
+		@options.metadataPerDocument    = options.metadataPerDocument   ? @constructor.DEFAULTS.metadataPerDocument
+		@options.storageType            = options.storageType           ? @constructor.DEFAULTS.storageType
+		@options.highWaterMark          = options.highWaterMark         ? @constructor.DEFAULTS.highWaterMark		
 
 	numberOfCopies: ->
 		# 1 + numberOfReplicas
